@@ -1,0 +1,108 @@
+pkg_info {
+  arch: "v1model"
+}
+tables {
+  preamble {
+    id: 33610024
+    name: "MyIngress.table0_control.table0"
+    alias: "table0"
+  }
+  match_fields {
+    id: 1
+    name: "standard_metadata.ingress_port"
+    bitwidth: 9
+    match_type: TERNARY
+  }
+  match_fields {
+    id: 2
+    name: "hdr.ethernet.src_addr"
+    bitwidth: 48
+    match_type: TERNARY
+  }
+  match_fields {
+    id: 3
+    name: "hdr.ethernet.dst_addr"
+    bitwidth: 48
+    match_type: TERNARY
+  }
+  match_fields {
+    id: 4
+    name: "hdr.ethernet.ether_type"
+    bitwidth: 16
+    match_type: TERNARY
+  }
+  action_refs {
+    id: 16779695
+  }
+  action_refs {
+    id: 16803653
+  }
+  action_refs {
+    id: 16799555
+  }
+  size: 512
+}
+actions {
+  preamble {
+    id: 16779695
+    name: "MyIngress.table0_control.send"
+    alias: "send"
+  }
+  params {
+    id: 1
+    name: "port"
+    bitwidth: 9
+  }
+}
+actions {
+  preamble {
+    id: 16803653
+    name: "MyIngress.table0_control.send_to_cpu"
+    alias: "send_to_cpu"
+  }
+}
+actions {
+  preamble {
+    id: 16799555
+    name: "MyIngress.table0_control.drop"
+    alias: "drop"
+  }
+}
+controller_packet_metadata {
+  preamble {
+    id: 67146229
+    name: "packet_in"
+    alias: "packet_in"
+    annotations: "@controller_header(\"packet_in\")"
+  }
+  metadata {
+    id: 1
+    name: "_padding"
+    bitwidth: 7
+  }
+  metadata {
+    id: 2
+    name: "ingress_port"
+    bitwidth: 9
+  }
+}
+controller_packet_metadata {
+  preamble {
+    id: 67121543
+    name: "packet_out"
+    alias: "packet_out"
+    annotations: "@controller_header(\"packet_out\")"
+  }
+  metadata {
+    id: 1
+    name: "_padding"
+    bitwidth: 7
+  }
+  metadata {
+    id: 2
+    name: "egress_port"
+    bitwidth: 9
+  }
+}
+type_info {
+}

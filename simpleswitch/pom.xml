@@ -32,14 +32,13 @@
     <url>http://onosproject.org</url>
 
     <properties>
-        <!-- Uncomment to generate ONOS app from this module.
-        <onos.app.name>org.foo.app</onos.app.name>
-        <onos.app.title>Foo App</onos.app.title>
-        <onos.app.origin>Foo, Inc.</onos.app.origin>
-        <onos.app.category>default</onos.app.category>
+        <onos.app.name>me.louisif.pipelines.simpleswitch</onos.app.name>
+        <onos.app.title>Simple P4 switch pipeline for tutorial</onos.app.title>
+        <onos.app.origin>Louis Li</onos.app.origin>
+        <onos.app.category>Pipeline</onos.app.category>
         <onos.app.url>http://onosproject.org</onos.app.url>
-        <onos.app.readme>ONOS OSGi bundle archetype.</onos.app.readme>
-        -->
+        <onos.app.version>2.7.0</onos.app.version>
+        <onos.app.requires>org.onosproject.drivers.bmv2</onos.app.requires>
     </properties>
 
     <dependencies>
@@ -71,6 +70,24 @@
             <scope>test</scope>
             <classifier>tests</classifier>
         </dependency>
+
+        <dependency>
+            <groupId>org.onosproject</groupId>
+            <artifactId>onos-protocols-p4runtime-model</artifactId>
+            <version>${onos.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.onosproject</groupId>
+            <artifactId>onos-cli</artifactId>
+            <version>${onos.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.karaf.shell</groupId>
+            <artifactId>org.apache.karaf.shell.console</artifactId>
+            <version>4.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -78,6 +95,23 @@
             <plugin>
                 <groupId>org.onosproject</groupId>
                 <artifactId>onos-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.5.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            me.louisif.pipelines.simpleswitch,
+                            me.louisif.pipelines.simpleswitch.cli
+                        </Export-Package>
+                        <Karaf-Commands>me.louisif.pipelines.simpleswitch.cli</Karaf-Commands>
+                        <_noee>true</_noee>
+                    </instructions>
+                </configuration>
             </plugin>
 
             <plugin>
